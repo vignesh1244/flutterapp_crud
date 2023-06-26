@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:nodeflutter/productdetailpage.dart';
+import 'package:nodeflutter/view/productdetailpage.dart';
 //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
 
 
