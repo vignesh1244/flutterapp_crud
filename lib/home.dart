@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:nodeflutter/productdetailpage.dart';
 //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
 
 
@@ -13,9 +15,8 @@ class _MyWidgetState extends State<MyWidget> {
   List<dynamic> products = [];
 
   Future<void> fetchData() async {
-
-    print('hello how are you');
-    final response = await http.get(Uri.parse('http://192.168.0.105:3000/product'));
+    final response = await http.get(Uri.parse('http://192.168.0.105:3000/products'));
+    print('product...response..'+response.body.toString());
     print('rrrr'+response.statusCode.toString());
     if (response.statusCode == 200) {
       setState(() {
@@ -33,26 +34,39 @@ class _MyWidgetState extends State<MyWidget> {
     fetchData();
   }
 
+
   @override
   Widget build(BuildContext context) {
+
     print('hello');
     return Scaffold(
 
       appBar: AppBar(
         title: Text('Product List'),
       ),
-      body:/* Text('hhhh'),*/ListView.builder(
+      body:ListView.builder(
         itemCount: products.length,
         itemBuilder: (BuildContext context, int index) {
           final product = products[index];
-          return ListTile(
-            leading: Image.network(product['image']),
-            title: Text(product['name']),
-            subtitle: Text('Quantity: ${product['quantity']}'),
-            trailing: Text('Price: \$${product['price']}'),
+          final productId = product['_id'];
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProductDetailsPage(productId: productId),
+                ),
+              );
+            },
+            child: ListTile(
+              leading: Image.network(product['image']),
+              title: Text(product['name']),
+              subtitle: Text('Quantity: ${product['quantity']}'),
+              trailing: Text('Price: \$${product['price']}'),
+            ),
           );
         },
-      ),
+      )
     );
   }
 }
