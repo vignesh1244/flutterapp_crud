@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nodeflutter/home.dart';
+import '../view/productpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,11 +16,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  Firstpage(),
+      home: Firstpage(),
     );
   }
 }
-
 
 class Firstpage extends StatefulWidget {
   const Firstpage({Key? key}) : super(key: key);
@@ -33,7 +32,9 @@ class _FirstpageState extends State<Firstpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('node '),),
+      appBar: AppBar(
+        title: Text('node '),
+      ),
       body: TextButton(
         onPressed: () {
           Navigator.push(
@@ -46,7 +47,6 @@ class _FirstpageState extends State<Firstpage> {
           print('Button clicked!');
         },
         child: Center(
-
           child: Text(
             'Click Me',
             style: TextStyle(
@@ -65,4 +65,3 @@ class _FirstpageState extends State<Firstpage> {
     );
   }
 }
-
