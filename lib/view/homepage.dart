@@ -37,32 +37,33 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     print('hello');
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Product List'),
-        ),
-        body: ListView.builder(
-          itemCount: products.length,
-          itemBuilder: (BuildContext context, int index) {
-            final product = products[index];
-            final productId = product['_id'];
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ProductDetailsPage(productId: productId),
-                  ),
-                );
-              },
-              child: ListTile(
-                leading: Image.network(product['image']),
-                title: Text(product['name']),
-                subtitle: Text('Quantity: ${product['quantity']}'),
-                trailing: Text('Price: \$${product['price']}'),
-              ),
-            );
-          },
-        ));
+      appBar: AppBar(
+        title: Center(child: Text('ANJANEYA')),
+      ),
+      body: ListView.builder(
+        itemCount: products.length,
+        itemBuilder: (BuildContext context, int index) {
+          final product = products[index];
+          final productId = product['_id'];
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ProductDetailsPage(productId: productId),
+                ),
+              );
+            },
+            child: ListTile(
+              leading: Image.network(product['image']),
+              title: Text(product['name']),
+              subtitle: Text('Quantity: ${product['quantity']}'),
+              trailing: Text('Price: \$${product['price']}'),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
