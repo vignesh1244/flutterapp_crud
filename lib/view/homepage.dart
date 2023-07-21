@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:nodeflutter/view/productdetailpage.dart';
 //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
 
-class MyWidget extends StatefulWidget {
+class Homepage extends StatefulWidget {
   @override
-  _MyWidgetState createState() => _MyWidgetState();
+  _HomepageState createState() => _HomepageState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _HomepageState extends State<Homepage> {
   List<dynamic> products = [];
 
   Future<void> fetchData() async {

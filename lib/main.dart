@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../view/productpage.dart';
+import '../view/homepage.dart';
 
+// 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
 void main() {
   runApp(const MyApp());
 }
@@ -32,36 +33,37 @@ class _FirstpageState extends State<Firstpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('node '),
-      ),
-      body: TextButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MyWidget(),
-            ),
-          );
-          // Add your button click logic here
-          print('Button clicked!');
-        },
-        child: Center(
-          child: Text(
-            'Click Me',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-            EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   title: Text('node '),
+      // ),
+      body: Homepage(),
+      // body: TextButton(
+      //   onPressed: () {
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(
+      //         builder: (context) => MyWidget(),
+      //       ),
+      //     );
+      //     // Add your button click logic here
+      //     print('Button clicked!');
+      //   },
+      //   child: Center(
+      //     child: Text(
+      //       'Click Me',
+      //       style: TextStyle(
+      //         fontSize: 20,
+      //         color: Colors.white,
+      //       ),
+      //     ),
+      //   ),
+      //   style: ButtonStyle(
+      //     backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+      //     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+      //       EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
