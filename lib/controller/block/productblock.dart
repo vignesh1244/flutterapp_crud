@@ -10,10 +10,13 @@ import 'dart:convert';
 import '../../widget/error_message.dart';
 
  class ProductBloc {
-  final _productController = StreamController<Detectproductapiresp>.broadcast();
-  Stream<Detectproductapiresp> get productStream => _productController.stream;
+  // final _productController = StreamController<Detectproductapiresp>.broadcast();
+  // Stream<Detectproductapiresp> get productStream => _productController.stream;
+   final StreamController<List<Detectproductapiresp>> _productController = StreamController<List<Detectproductapiresp>>();
+   Stream<List<Detectproductapiresp>> get productStream => _productController.stream;
 
-  // final _activityIndicatorStreamController =
+
+   // final _activityIndicatorStreamController =
   //     BehaviorSubject<bool>.seeded(false);
   // Stream<bool> get activityIndicatorStream =>
   //     _activityIndicatorStreamController.stream;
@@ -21,7 +24,7 @@ import '../../widget/error_message.dart';
   //     _activityIndicatorStreamController.isClosed
   //         ? null
   //         : _activityIndicatorStreamController.sink.add;
-  //
+
   // final _profileDeleteStreamController =
   //     BehaviorSubject<Detectproductapiresp>.seeded(
   //         Detectproductapiresp.fromJson({}));
@@ -88,23 +91,45 @@ import '../../widget/error_message.dart';
   // }
 
 
-  void fetchData() async {
-    try {
-      final response = await http.get(Uri.parse('http://192.168.0.105:3000/products'));
-      if (response.statusCode == 200) {
-        final List<dynamic> responseData = json.decode(response.body);
-        for (final productData in responseData) {
-          final product = Detectproductapiresp.fromJson(productData);
-          _productController.sink.add(product);
-        }
-      } else {
-        throw Exception('Failed to fetch data');
-      }
-    } catch (e) {
-      debugPrint('Error fetching data: $e');
-      _productController.sink.addError(e);
-    }
-  }
+  // void fetchData() async {
+  //   try {
+  //     final response = await http.get(Uri.parse('http://192.168.0.105:3000/products'));
+  //     if (response.statusCode == 200) {
+  //       final List<dynamic> responseData = json.decode(response.body);
+  //       for (final productData in responseData) {
+  //         final product = Detectproductapiresp.fromJson(productData);
+  //         _productController.sink.add(product);
+  //       }
+  //     } else {
+  //       throw Exception('Failed to fetch data');
+  //     }
+  //   } catch (e) {
+  //     debugPrint('Error fetching data: $e');
+  //     _productController.sink.addError(e);
+  //   }
+  // }
+
+   void fetchData() async {
+     try {
+       final response = await http.get(Uri.parse('http://192.168.0.105:3000/products'));
+       if (response.statusCode == 200) {
+         final List<dynamic> responseData = json.decode(response.body);
+         final List<Detectproductapiresp> products = [];
+
+         for (final productData in responseData) {
+           final product = Detectproductapiresp.fromJson(productData);
+           products.add(product);
+         }
+
+         _productController.sink.add(products);
+       } else {
+         throw Exception('Failed to fetch data');
+       }
+     } catch (e) {
+       debugPrint('Error fetching data: $e');
+       _productController.sink.addError(e);
+     }
+   }
 
   void dispose() {
     _productController.close();

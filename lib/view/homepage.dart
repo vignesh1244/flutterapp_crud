@@ -41,49 +41,25 @@ class _HomepageState extends State<Homepage> {
   //   }
   // }
 
-
   @override
   Widget build(BuildContext context) {
     print('hello');
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('A_N_J_A_N_E_Y_A')),
+        // title: Center(child: Text('A_N_J_A_N_E_Y_A')),
+        title: Center(child: Text('b_lock app')),
       ),
-      body: /*ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (BuildContext context, int index) {
-          final product = products[index];
-          final productId = product['_id'];
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ProductDetailsPage(productId: productId),
-                ),
-              );
-            },
-            child: ListTile(
-              leading: Image.network(product['image']),
-              title: Text(product['name']),
-              subtitle: Text('Quantity: ${product['quantity']}'),
-              trailing: Text('Price: \$${product['price']}'),
-            ),
-          );
-        },
-      ),*/
-
-      // StreamBuilder<List<Detectproductapiresp>>(
-      //   stream: _productBloc.productStream,
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       final List<Detectproductapiresp> products = snapshot.data!;
-      //       return ListView.builder(
-      //         itemCount: products.length,
-      //         itemBuilder: (BuildContext context, int index) {
-      //           final product = products[index];
-      //           final productId = product.sId;
+      // body: ListView.builder(
+      //   // itemCount: _productBloc.length,
+      //   // itemCount: // Replace this with the number of items in your stream,
+      //   itemBuilder: (context, index) {
+      //     return StreamBuilder<Detectproductapiresp>(
+      //       stream: _productBloc.productStream,
+      //       builder: (context, snapshot) {
+      //         if (snapshot.hasData) {
+      //           final Detectproductapiresp product = snapshot.data!;
+      //           final productId =
+      //               product.sId; // Assuming 'sId' is the field for product ID
       //
       //           return GestureDetector(
       //             onTap: () {
@@ -91,72 +67,60 @@ class _HomepageState extends State<Homepage> {
       //                 context,
       //                 MaterialPageRoute(
       //                   builder: (context) =>
-      //                       ProductDetailsPage(productId: productId.toString()),
+      //                       ProductDetailsPage(productId: productId!),
       //                 ),
       //               );
       //             },
       //             child: ListTile(
-      //               leading: Image.network(product.image.toString()),
-      //               title: Text(product.name.toString()),
+      //               leading: Image.network(product.image!),
+      //               title: Text(product.name!),
       //               subtitle: Text('Quantity: ${product.quantity}'),
       //               trailing: Text('Price: \$${product.price}'),
       //             ),
       //           );
-      //         },
-      //       );
-      //     } else if (snapshot.hasError) {
-      //       return Center(
-      //         child: Text('Error: ${snapshot.error}'),
-      //       );
-      //     } else {
-      //       return Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     }
+      //         } else if (snapshot.hasError) {
+      //           return Center(
+      //             child: Text('Error: ${snapshot.error}'),
+      //           );
+      //         } else {
+      //           return Center(
+      //             child: CircularProgressIndicator(),
+      //           );
+      //         }
+      //       },
+      //     );
       //   },
       // ),
-
-      // StreamBuilder<Detectproductapiresp>(
-      //   stream: _productBloc.productStream,
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       final productApiResponse = snapshot.data;
-      //       return Center(
-      //         child: Text('Product Name: ${productApiResponse!.name}'),
-      //       );
-      //     } else if (snapshot.hasError) {
-      //       return Center(
-      //         child: Text('Error: ${snapshot.error}'),
-      //       );
-      //     } else {
-      //       return const Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     }
-      //   },
-      // ),
-      StreamBuilder<Detectproductapiresp>(
+      body: StreamBuilder<List<Detectproductapiresp>>(
         stream: _productBloc.productStream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final Detectproductapiresp product = snapshot.data!;
-            final productId = product.sId; // Assuming 'sId' is the field for product ID
+            final List<Detectproductapiresp> productList = snapshot.data!;
 
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProductDetailsPage(productId: productId!),
+            return ListView.builder(
+              itemCount: productList.length,
+              itemBuilder: (context, index) {
+                final product = productList[index];
+                final productId = product.sId; // Assuming 'sId' is the field for product ID
+
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ProductDetailsPage(productId: productId!),
+                      ),
+                    );
+                  },
+                  child: ListTile(
+                    leading: Image.network(product.image!),
+                    title: Text(product.name!),
+                    subtitle: Text('Quantity: ${product.quantity}'),
+                    trailing: Text('Price: \$${product.price}'),
                   ),
                 );
               },
-              child: ListTile(
-                leading: Image.network(product.image!),
-                title: Text(product.name!),
-                subtitle: Text('Quantity: ${product.quantity}'),
-                trailing: Text('Price: \$${product.price}'),
-              ),
             );
           } else if (snapshot.hasError) {
             return Center(
@@ -168,8 +132,17 @@ class _HomepageState extends State<Homepage> {
             );
           }
         },
-      )
-    );
+      ),
 
+    );
   }
 }
+
+
+
+// child: ListTile(
+// leading: Image.network(product['image']),
+// title: Text(product['name']),
+// subtitle: Text('Quantity: ${product['quantity']}'),
+// trailing: Text('Price: \$${product['price']}'),
+// ),
